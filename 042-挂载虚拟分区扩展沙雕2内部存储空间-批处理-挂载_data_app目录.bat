@@ -14,7 +14,7 @@ set APP_FILE_SIZE=8192
 
 echo.
 echo ==================================================
-echo + 挂载APP脚本 V1.0                      20200919 +
+echo + 挂载APP脚本 V1.1                      20200930 +
 echo ==================================================
 echo + 本批处理脚本用来挂载SD卡镜像文件到 /data/app ，+
 echo + 可以同挂载/data/media和/data/data的脚本一起    +
@@ -119,6 +119,7 @@ echo + 否则直接回车继续。                               +
 echo ----------------------------------------------------
 echo.
 echo.
+set userinput=NA
 set /p userinput=
 
 if "%userinput%"=="YES" (
