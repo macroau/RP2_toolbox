@@ -122,7 +122,7 @@ echo -------------------------------------------------------------
 echo + Finished ...                                              +
 echo +                                                           +
 echo + You can try to run BusyBox tools by typing something like +
-echo +   adb shell busybox fsck --help                           +                           
+echo +   adb shell busybox fsck --help                           +
 echo +             -------                                       +
 echo + Or you can type                                           +
 echo +   adb shell busybox --install /system/xbin                +
