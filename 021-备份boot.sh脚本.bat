@@ -1,6 +1,6 @@
 @echo off
 chcp 65001 > NUL
-mode con cols=80 lines=85
+mode con cols=80 lines=30
 title=Backup boot.sh file
 ::color B0
 color 1F

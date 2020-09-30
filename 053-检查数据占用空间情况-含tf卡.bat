@@ -22,7 +22,7 @@ echo.
 echo.
 TIMEOUT /T 2 /NOBREAK > NUL
 adb shell df /data
-
+adb shell df /rsdcard
 echo.
 echo.
 

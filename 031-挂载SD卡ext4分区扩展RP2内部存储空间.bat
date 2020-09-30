@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 > NUL
-mode con cols=80 lines=85
-title=Mount SD ext4
+mode con cols=80 lines=30
+title=Mount SD ext4 partition
 ::color B0
 color 1F
 echo Starting ... 启动中 ...
@@ -16,6 +16,7 @@ echo +                                 -------                  +
 echo + 确认请继续， 不确定请直接关闭！                          +
 echo ============================================================
 echo.
+
 pause
 
 echo.
@@ -42,6 +43,7 @@ echo +   第2个分区用来挂载到 /data/media，第3个分区（如果需要
 echo + 挂载到 /data/data，第4个分区（如果需要）挂载到 /data/app 。    +
 echo ==================================================================
 echo.
+
 pause
 
 echo.
@@ -70,6 +72,7 @@ echo ! 不接受可以 直接关闭本窗口 退出。                 !
 echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 echo.
 echo.
+
 pause
 
 echo.
@@ -127,8 +130,8 @@ goto exit
 
 goto exit
 
-
 :start
+
 echo.
 echo.
 echo ------------------------------------------------------------
@@ -145,6 +148,7 @@ echo + 请一定 不要继续， 可 直接关闭本窗口 退出！            
 echo ------------------------------------------------------------
 echo.
 echo.
+
 pause
 
 echo.
@@ -163,19 +167,18 @@ adb remount
 echo.
 echo ------------------------------------------------------------
 echo + 如果上面adb root或adb remount没有成功，                  +
-echo + 请一定 不要继续， 可 直接关闭本窗口 退出！               +
+echo + 请一定 不要继续 ！                                       +
 echo ------------------------------------------------------------
 echo.
 echo.
-pause
 
+pause
 
 set PART_NO=2
 set DEV_NAME=/dev/block/mmcblk1p2
 set INN_DIR=/data/media
 
 CALL :work_prog
-
 
 if "%MOUNT_DATA%"=="0" (
 echo.
@@ -193,7 +196,6 @@ set INN_DIR=/data/data
 
 CALL :work_prog
 
-
 if "%MOUNT_APP%"=="0" (
 echo.
 echo --------------------------------------------
@@ -210,8 +212,8 @@ set INN_DIR=/data/app
 
 CALL :work_prog
 
-
 :fin
+
 echo.
 echo.
 echo ==================================================
@@ -221,6 +223,7 @@ echo + 如果不想重启，现在 直接关闭本窗口 退出 ...     +
 echo ==================================================
 echo.
 echo.
+
 pause
 
 echo.
@@ -231,27 +234,30 @@ echo.
 
 adb reboot
 
-
 :exit
+
 pause
+
 :: 退出主程序
 EXIT /B %ERRORLEVEL%
 
-
 :work_prog
+
 :: ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 ::set PART_NO=?
 ::set DEV_NAME=/dev/block/mmcblk1p?
 ::set INN_DIR=/data/?
+
 echo.
 echo.
 echo --------------------------------------------
-echo + 挂载SD卡第 %PART_NO% 个分区（ext4格式）  +
-echo + 分区设备名： %DEV_NAME%                  +
+echo + 挂载SD卡第 %PART_NO% 个分区（ext4格式）          +
+echo + 分区设备名： %DEV_NAME%        +
 echo --------------------------------------------
 echo.
 echo.
 
+adb shell mke2fs -t ext4 -F %DEV_NAME%
 adb shell mkdir /data/tempmnt
 adb shell mount -o rw -t ext4 %DEV_NAME% /data/tempmnt
 
@@ -260,13 +266,14 @@ echo --------------------------------------------
 echo +  上面如果报错，请不要继续！！！          +
 echo --------------------------------------------
 echo.
+
 pause
 
 echo.
 echo.
 echo --------------------------------------------------------
-echo + 拷贝 %INN_DIR% 目录下的数据 到 第 %PART_NO% 个分区， +
-echo + 第 %PART_NO% 个分区的数据将被清除！                  +
+echo + 拷贝 %INN_DIR% 目录下的数据 到 第 %PART_NO% 个分区，       +
+echo + 第 %PART_NO% 个分区的数据将被清除！                          +
 echo + 此过程需要一点时间，请耐心等待 ...                   +
 echo --------------------------------------------------------
 echo.
@@ -285,6 +292,7 @@ echo + 拷贝完成，检查上面的过程是否有出错信息。 +
 echo --------------------------------------------
 echo.
 echo.
+
 pause
 
 echo.
@@ -304,13 +312,16 @@ echo --------------------------------------------
 echo + 删除原 %INN_DIR% 目录下的数据 ...        +
 echo --------------------------------------------
 echo.
+
 adb shell rm -rf %INN_DIR%/*
+
 echo.
 echo --------------------------------------------
 echo + 删除完成，检查上面的过程是否有出错信息。 +
 echo --------------------------------------------
 echo.
 echo.
+
 pause
 )
 
@@ -331,12 +342,15 @@ adb shell "cp /system/bin/boot.sh /system/bin/boot.sh.`date +%%y%%m%%d_%%H%%M`"
 adb shell "echo >> /system/bin/boot.sh"
 adb shell "echo >> /system/bin/boot.sh"
 adb shell "echo 'mount -o rw -t ext4 %DEV_NAME% %INN_DIR%' >> /system/bin/boot.sh"
+
 echo.
 echo --------------------------------------------
 echo + 操作完成！                               +
 echo --------------------------------------------
 echo.
+
 pause
+
 :: ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 EXIT /B 0
 

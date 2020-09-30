@@ -1,7 +1,7 @@
 @echo off
 chcp 65001 > NUL
-mode con cols=80 lines=85
-title=Unmount SD ext4
+mode con cols=80 lines=30
+title=Unmount SD ext4 partition
 color B0
 ::color 1F
 echo Starting ... 启动中 ...
@@ -13,17 +13,19 @@ echo +                                 -------                  +
 echo + 确认请继续， 不确定请直接关闭！                          +
 echo ============================================================
 echo.
+
 pause
 
 :menu
+
 echo.
 echo.
 echo -------------------------------------------------------
 echo + 选择恢复的挂载点                                    +
 echo +                                                     +
-echo +  1. /data/app     ^<===   /dev/block/mmcblk1p4 分区 +
-echo +  2. /data/data    ^<===   /dev/block/mmcblk1p3 分区 +
-echo +  3. /data/media   ^<===   /dev/block/mmcblk1p2 分区 +
+echo +  1. /data/app     ^<===   /dev/block/mmcblk1p4 分区  +
+echo +  2. /data/data    ^<===   /dev/block/mmcblk1p3 分区  +
+echo +  3. /data/media   ^<===   /dev/block/mmcblk1p2 分区  +
 echo +  9. 重启RP2                                         +
 echo +                                                     +
 echo + 输入数字后回车： （直接关闭窗口可以退出）           +
@@ -69,8 +71,9 @@ echo + 的数据到到内部存储 %MOUNT_POINT% 。                      +
 echo + 取消挂载前， 挂载到 %MOUNT_POINT% 的是 %IMG_FILE% 分区。 +
 echo ============================================================
 echo.
+
 pause
-echo.
+
 echo.
 echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 echo !【注意】                                                !
@@ -97,7 +100,7 @@ echo ! 按任意键继续，表示接受！                               !
 echo ! 不接受可以 直接关闭本窗口 退出。                       !
 echo !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
 echo.
-echo.
+
 pause
 
 CALL :adb_init
@@ -142,6 +145,7 @@ goto boot_mod_fin
 )
 
 :boot_mod_fin
+
 echo.
 echo.
 echo -------------------------------------------------
@@ -170,6 +174,7 @@ echo +   RP2完全启动后，此时不要操作RP2，按任意键继续。 +
 echo ----------------------------------------------------
 echo.
 echo.
+
 pause
 
 CALL :adb_init
@@ -185,15 +190,18 @@ echo.
 echo.
 echo  即将挂载 %IMG_FILE% 分区 ...
 echo.
+
 pause
 
 adb shell mkdir /data/temp4
-adb shell mount -o rw -t ext4 %IMG_FILE% /data/temp4
+::adb shell mount -o rw -t ext4 %IMG_FILE% /data/temp4
+adb shell mount -o ro -t ext4 %IMG_FILE% /data/temp4
 
 echo --------------------------------------------
 echo +  上面如果报错，请不要继续！！！          +
 echo --------------------------------------------
 echo.
+
 pause
 
 echo.
@@ -249,8 +257,8 @@ echo --------------------------------------------
 echo.
 echo.
 
-
 pause
+
 goto menu
 
 
@@ -262,6 +270,7 @@ EXIT /B %ERRORLEVEL%
 
 :adb_init
 :: ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
+
 echo.
 echo.
 echo --------------------------------------------
@@ -272,10 +281,11 @@ adb devices
 
 echo --------------------------------------------
 echo + 如果上面没有成功列出正确的安卓设备，     +
-echo + 请一定 直接关闭本窗口 退出！             +
+echo + 请一定 不要继续 ！                       +
 echo --------------------------------------------
 echo.
 echo.
+
 pause
 
 echo.
@@ -293,13 +303,13 @@ adb remount
 
 echo --------------------------------------------
 echo + 如果上面adb root或adb remount没有成功，  +
-echo + 请一定 直接关闭本窗口 退出！             +
+echo + 请一定 不要继续 ！                       +
 echo --------------------------------------------
 echo.
 echo.
+
 pause
 :: ::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::::
 EXIT /B 0
-
 
 ::EOF
