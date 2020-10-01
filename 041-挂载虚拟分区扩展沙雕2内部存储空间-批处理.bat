@@ -7,6 +7,7 @@ color 1F
 echo Starting ... 启动中 ...
 .\ConSetBuffer.exe /Y=9999
 
+
 echo ============================================================
 echo + 本bat脚本的运行需要RP2已成功安装BusyBox！                +
 echo +                                 -------                  +

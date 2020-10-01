@@ -6,6 +6,7 @@ color B0
 ::color 1F
 echo Starting ... 启动中 ... 
 
+
 echo.
 echo  检查RP2是否连接 ... 
 echo.

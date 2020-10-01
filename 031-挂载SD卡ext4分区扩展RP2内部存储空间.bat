@@ -7,6 +7,7 @@ color 1F
 echo Starting ... 启动中 ...
 .\ConSetBuffer.exe /Y=9999
 
+
 set MOUNT_DATA=0
 set MOUNT_APP=0
 

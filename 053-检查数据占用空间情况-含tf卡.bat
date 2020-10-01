@@ -6,6 +6,7 @@ title=检查数据占用空间情况
 color 1F
 echo Starting ... 启动中 ...
 
+
 echo.
 echo.
 adb shell df /data/media /data/data /data/app

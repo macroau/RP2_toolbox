@@ -7,6 +7,7 @@ color 4F
 echo Starting ... 启动中 ...
 .\ConSetBuffer.exe /Y=9999
 
+
 adb root
 
 :menu

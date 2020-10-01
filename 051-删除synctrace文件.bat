@@ -5,6 +5,7 @@ title=删除synctrace文件
 ::color B0
 color 1F
 
+
 echo.
 echo.
 echo ------------------------------------------------------

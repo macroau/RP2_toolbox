@@ -7,6 +7,7 @@ color 2F
 echo Starting ... 启动中 ...
 .\ConSetBuffer.exe /Y=9999
 
+
 ::挂载到/data/app的镜像文件的文件名
 set APP_FILE=image_data_app.img
 ::下面一行是挂载到 /data/app 的镜像文件预设大小，单位MB
