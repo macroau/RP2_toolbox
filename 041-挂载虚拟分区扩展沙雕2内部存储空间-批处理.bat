@@ -241,6 +241,7 @@ echo.
 
 pause
 
+adb shell sync
 adb reboot
 
 ::EOF

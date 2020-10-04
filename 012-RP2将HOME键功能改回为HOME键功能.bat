@@ -89,6 +89,7 @@ echo.
 
 pause
 
+adb shell sync
 adb reboot
 
 echo.

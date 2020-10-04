@@ -22,6 +22,7 @@ echo ------------------------------------------------------
 echo.
 echo.
 
+adb shell sync
 adb reboot
 
 pause

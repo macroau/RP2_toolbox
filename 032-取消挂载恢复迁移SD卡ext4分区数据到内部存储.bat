@@ -54,6 +54,7 @@ goto start
 
 if "%userinput1%"=="9" (
 echo [[[ 即将重启RP2！ ]]]
+adb shell sync
 adb reboot
 goto exit
 )
@@ -159,6 +160,7 @@ echo.
 
 pause
 
+adb shell sync
 adb reboot
 
 echo.
@@ -248,6 +250,7 @@ echo.
 
 pause
 
+adb shell sync
 adb reboot
 
 echo.

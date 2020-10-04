@@ -28,26 +28,18 @@ pause
 echo.
 echo  还原boot.sh ... 
 echo.
-adb shell "cp /system/bin/boot.sh /system/bin/boot.sh.bak`date +%%y%%m%%d_%%H%%M`"
-adb push boot.sh /system/bin/boot.sh
+adb shell "cp /data/media/0/Android/data/com.retroarch/files/retroarch.cfg /data/media/0/Android/data/com.retroarch/files/retroarch.cfg.bak`date +%%y%%m%%d_%%H%%M`"
+adb push retroarch.cfg /data/media/0/Android/data/com.retroarch/files/retroarch.cfg
 echo.
 echo.
 echo  还原完成. 
 echo.
-echo  回滚屏幕，检查是否有报错。 
+echo  回滚屏幕，检查是否有报错.  
 echo.
-echo  按任意键后，自动重启RP2 ... 
-echo.
+
 pause
 
-echo.
-echo  重启RP2 ... 
-echo.
 
-adb shell sync
-adb reboot
-
-echo.
 echo 按任意键退出 ... 
 echo.
 pause
