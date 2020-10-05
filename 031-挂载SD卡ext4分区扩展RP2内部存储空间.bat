@@ -134,6 +134,8 @@ goto exit
 
 :start
 
+TIMEOUT /T 2 /NOBREAK > NUL
+
 echo.
 echo.
 echo ------------------------------------------------------------
