@@ -32,7 +32,7 @@ echo.
 echo ==================================================================
 echo . 本bat将备份RA1.9的全部设置                                     .
 echo ==================================================================
-echo .   备份过程会排除某些可能不必要的文件和目录                     .
+echo .   备份过程会排除某些可能没有必要备份的文件和目录               .
 echo .   按任意键开始 ...      （需要ADB）                            .
 echo ==================================================================
 echo.
@@ -102,6 +102,7 @@ echo ------
 echo *** 拉取压缩包 %EXT_DATA_FILE% ...
 adb pull %TF_ROOT%/%EXT_DATA_FILE% %LOCAL_FILE_DIR%
 echo ### 拉取完成 .
+adb shell rm %TF_ROOT%/%EXT_DATA_FILE%
 echo.
 
 echo ------------------------------------------
@@ -118,6 +119,7 @@ echo ------
 echo *** 拉取压缩包 %INT_DATA_MEDIA_FILE% ...
 adb pull %TF_ROOT%/%INT_DATA_MEDIA_FILE% %LOCAL_FILE_DIR%
 echo ### 拉取完成 .
+adb shell rm %TF_ROOT%/%INT_DATA_MEDIA_FILE%
 echo.
 
 echo ------------------------------------------
@@ -134,6 +136,7 @@ echo ------
 echo *** 拉取压缩包 %INT_DATA_DATA_FILE% ...
 adb pull %TF_ROOT%/%INT_DATA_DATA_FILE% %LOCAL_FILE_DIR%
 echo ### 拉取完成 .
+adb shell rm %TF_ROOT%/%INT_DATA_DATA_FILE%
 echo.
 
 echo ------------------------------------------
@@ -149,6 +152,7 @@ echo ------
 echo *** 拉取压缩包 %INT_DATA_MEDIA_ANDR_FILE% ...
 adb pull %TF_ROOT%/%INT_DATA_MEDIA_ANDR_FILE% %LOCAL_FILE_DIR%
 echo ### 拉取完成 .
+adb shell rm %TF_ROOT%/%INT_DATA_MEDIA_ANDR_FILE%
 echo.
 
 echo ------------------------------------------

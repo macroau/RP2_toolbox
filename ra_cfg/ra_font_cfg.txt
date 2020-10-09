@@ -1,0 +1,4 @@
+
+menu_driver = "xmb"
+xmb_font = "/storage/emulated/0/sarasa-ui-sc-regular.ttf"
+video_font_path = "/storage/emulated/0/sarasa-ui-sc-regular.ttf"

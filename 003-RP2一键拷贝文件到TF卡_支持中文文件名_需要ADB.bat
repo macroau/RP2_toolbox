@@ -2,8 +2,7 @@
 chcp 65001 > NUL
 mode con cols=120 lines=30
 title=ADB COPY
-::color B0
-color 20
+
 echo Starting ... 启动中 ...
 
 if '%1'=='' (
@@ -11,17 +10,25 @@ echo .  将需要拷贝的文件拖放到这个批处理上面  .
 goto exit
 )
 
-set TF_ROOT=/rsdcard
+:: RP2上的目标目录，如不存在会自动建立，可更改 ...
+set TF_ROOT=/rsdcard/Roms/000
+:: ------------------------------- 
+
 set TEMP_FILE=adb_push_temp.tmp
 
 set FILENAME=%~n1%~x1 
 
 echo.
 echo ==================================================
-echo . 即将拷贝《%FILENAME%》文件到 TF卡根目录  ...
+echo . 即将拷贝《%FILENAME%》文件到 TF卡如下目录：    .
+echo .   %TF_ROOT%                                    .
 echo ==================================================
 echo . 本批处理脚本解决了（绕开了）                   .
-echo . 直接adb push无法传输中文文件名文件的问题       .
+echo . 直接adb push无法传输中文文件名文件的问题。     .
+echo .   RP2上的目标目录可以更改为其他目录，          .
+echo . 可直接修改bat文件里如下语句：                  .
+echo .   set TF_ROOT=/rsdcard/Roms/000                .
+echo .               -----------------为期望的目录    .
 echo --------------------------------------------------
 echo.
 echo.
@@ -49,12 +56,9 @@ echo ------------------------------------------------------------
 echo.
 
 
-
-
-
-
 echo *** 开始传输 "%1" ，请稍后 ...
 
+adb shell "mkdir -p %TF_ROOT%"
 adb push %1 %TF_ROOT%/%TEMP_FILE%
 
 
