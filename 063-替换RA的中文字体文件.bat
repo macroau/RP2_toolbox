@@ -15,7 +15,7 @@ TIMEOUT /T 2 /NOBREAK > NUL
 echo.
 echo.
 echo ==================================================================
-echo . 本bat替换RA（1.5和1.9）的中文字体文件                          .
+echo . 本bat替换RA（1.5和1.9/1.8.4）的中文字体文件                    .
 echo ==================================================================
 echo .   请确认已安装RA，并且RA当前处于关闭状态                       .
 echo .   请不要安装带有ra32或者aarch64字样的RA                        .
@@ -88,25 +88,14 @@ adb shell cp /data/media/0/sarasa-ui-sc-regular.ttf /data/data/com.gpsp/assets/x
 adb shell cp /data/media/0/sarasa-ui-sc-regular.ttf /data/data/com.gpsp/assets/glui/font.ttf
 adb shell cp /data/media/0/sarasa-ui-sc-regular.ttf /data/data/com.gpsp/assets/zarch/Roboto-Condensed.ttf
 
-adb shell chmod 777 /data/data/com.retroarch/assets/switch/nxrgui.ttf
-adb shell chmod 777 /data/data/com.retroarch/assets/switch/font.ttf
-adb shell chmod 777 /data/data/com.retroarch/assets/xmb/monochrome/font.ttf
-adb shell chmod 777 /data/data/com.retroarch/assets/glui/font.ttf
-adb shell chmod 777 /data/data/com.retroarch/assets/ozone/bold.ttf
-adb shell chmod 777 /data/data/com.retroarch/assets/ozone/regular.ttf
-adb shell chmod 777 /data/data/com.gpsp/assets/xmb/flatui/font.ttf
-adb shell chmod 777 /data/data/com.gpsp/assets/xmb/retroactive/font.ttf
-adb shell chmod 777 /data/data/com.gpsp/assets/xmb/dot-art/font.ttf
-adb shell chmod 777 /data/data/com.gpsp/assets/xmb/neoactive/font.ttf
-adb shell chmod 777 /data/data/com.gpsp/assets/xmb/monochrome/font.ttf
-adb shell chmod 777 /data/data/com.gpsp/assets/xmb/systematic/font.ttf
-adb shell chmod 777 /data/data/com.gpsp/assets/glui/font.ttf
-adb shell chmod 777 /data/data/com.gpsp/assets/zarch/Roboto-Condensed.ttf
-
 adb pull /sdcard/Android/data/com.retroarch/files/retroarch.cfg
 copy /b retroarch.cfg+ra_cfg\ra_font_cfg.txt
 adb push retroarch.cfg /sdcard/Android/data/com.retroarch/files/retroarch.cfg
 del retroarch.cfg
+
+adb shell chmod -R 777 /data/data/com.retroarch/*
+adb shell chmod -R 777 /data/data/com.gpsp/*
+adb shell chmod -R 777 /data/media/*
 
 echo ### 替换完成 .
 echo ------------------------------------------
