@@ -6,7 +6,7 @@ title=ADB install apk
 color 20
 echo Starting ... 启动中 ...
 
-set TEMP_FILE=/rsdcard/adb_install_apk_temp.apk
+set TEMP_FILE=/storage/sdcard0/adb_install_apk_temp.apk
 
 ::set TEMP=%1
 ::set "TEMP=%TEMP: =%" 

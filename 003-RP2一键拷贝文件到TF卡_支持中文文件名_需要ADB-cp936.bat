@@ -10,13 +10,17 @@ echo .  将需要拷贝的文件拖放到这个批处理上面  .
 goto exit
 )
 
+set FILENAME=%~n1%~x1
+set FILENAME_EXT=%~x1
+
 :: RP2上的目标目录，如不存在会自动建立，可更改 ...
-set TF_ROOT=/rsdcard/Roms/000
+set TF_ROOT=/sdcard/RetroArch/assets/xmb/monochrome/png
 :: ------------------------------- 
 
-set TEMP_FILE=adb_push_temp.tmp
+::set TEMP_FILE=adb_push_temp%FILENAME_EXT%
+set TEMP_FILE=adb_push_temp_file
 
-set FILENAME=%~n1%~x1 
+
 
 echo.
 echo ==================================================

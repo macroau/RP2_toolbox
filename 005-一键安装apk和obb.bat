@@ -5,8 +5,8 @@ bin\ConSetBuffer.exe /Y=9999
 
 echo Starting ... 启动中 ...
 
-set RP2_OBB_DIR=/sdcard/Android/obb
-set TEMP_FILE=/rsdcard/adb_install_apk_temp.apk
+set RP2_OBB_DIR=/storage/sdcard0/Android/obb
+set TEMP_FILE=/storage/sdcard0/adb_install_apk_temp.apk
 set APK_DIR=apk
 set OBB_DIR=obb
 
@@ -36,7 +36,7 @@ echo.
 
 cd %APK_DIR%
 
-for %%j in (*) do ( 
+for %%j in (*.apk) do ( 
 echo *** 开始传输 %%j ，请稍后 ...
 
 adb push "%%j" %TEMP_FILE%
@@ -63,11 +63,12 @@ cd %OBB_DIR%
 
 for /d %%i in (*) do (
 echo *** 在RP2建立文件夹： %RP2_OBB_DIR%/%%i ...
+adb shell mkdir -p %RP2_OBB_DIR%/%%i
 echo ### 建立完毕 .
 echo ----
 echo.
 echo.
-adb shell mkdir -p %RP2_OBB_DIR%/%%i
+
 
 cd %%i
 
